@@ -130,7 +130,7 @@ public class frmLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         if(txtUsername.getText()=="" || txtPassword.getText()==""){
-            JOptionPane.showMessageDialog(this, "Username or Password is invalid");
+            JOptionPane.showMessageDialog(this, "Username or Password is invalid!");
         }
         else if(txtUsername.getText().equals("nhansu")&&txtPassword.getText().equals("123")){
             JOptionPane.showMessageDialog(this, "Logged in successfully");
