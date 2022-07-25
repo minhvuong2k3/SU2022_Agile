@@ -9,6 +9,7 @@ public class frmLogin extends javax.swing.JFrame {
     
     public void check(){
         chkRemember.setSelected(true);
+        //hello
     }
     
     public frmLogin() {
