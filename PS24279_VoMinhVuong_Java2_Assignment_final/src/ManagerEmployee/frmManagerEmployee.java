@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class frmManagerEmployee extends javax.swing.JFrame {
+    //Luu lich su dang xuat
     
     String path = "C:\\Users\\Admin\\Documents\\Github\\SU2022_Agile\\PS24279_VoMinhVuong_Java2_Assignment_final\\Employee.dat";
 
