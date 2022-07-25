@@ -46,6 +46,10 @@ public class frmManagerEmployee extends javax.swing.JFrame {
             jbindex.setText("|| -  "+String.valueOf(index)+"  of  "+String.valueOf(list.size())+"  - ||");
     }
     
+    public void historyLogout () {
+        
+    }
+    
     public Object readFile(String path) throws FileNotFoundException, IOException, ClassNotFoundException{
         try (
                 FileInputStream fis = new FileInputStream(path);
