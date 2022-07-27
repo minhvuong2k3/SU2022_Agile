@@ -126,6 +126,7 @@ public class frmLogin extends javax.swing.JFrame {
         txtUsername.setText("");
         txtPassword.setText("");
         check();
+        //Minh Vương
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
