@@ -72,6 +72,8 @@ public class frmManagerEmployee extends javax.swing.JFrame {
     }
     
     public boolean check(int check1){
+        
+        //chức năng kiểm tra thông tin đăng nhập
         if(txtMaNhanVien.getText().trim().length()==0){
             txtMaNhanVien.setBackground(Color.yellow);
             txtMaNhanVien.requestFocus();
