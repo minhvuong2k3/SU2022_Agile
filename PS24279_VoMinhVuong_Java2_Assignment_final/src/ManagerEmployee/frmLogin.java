@@ -152,7 +152,7 @@ public class frmLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Username or Password is invalid");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
-
+    //Lưu lịch sử đăng nhập
     /**
      * @param args the command line arguments
      */
