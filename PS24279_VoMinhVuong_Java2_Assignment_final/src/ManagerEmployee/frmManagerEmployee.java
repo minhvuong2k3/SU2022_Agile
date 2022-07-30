@@ -661,6 +661,8 @@ public class frmManagerEmployee extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    //Chuyển hướng ô nhập bằng nút tab
+    
     private void txtMaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNhanVienActionPerformed
         // TODO add your handling codeere:
     }//GEN-LAST:event_txtMaNhanVienActionPerformed
