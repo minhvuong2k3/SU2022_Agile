@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmManagerEmployee extends javax.swing.JFrame {
     //Luu lich su dang xuat _  Phuc
     //Khoi phuc file _ Phuc
+    //Bao ve khong bi xoa du lieu _ Phuc
     
     String path = "C:\\Users\\Admin\\Documents\\Github\\SU2022_Agile\\PS24279_VoMinhVuong_Java2_Assignment_final\\Employee.dat";
 
@@ -74,6 +75,8 @@ public class frmManagerEmployee extends javax.swing.JFrame {
     }
     
     public boolean check(int check1){
+        
+        //chức năng kiểm tra thông tin đăng nhập
         if(txtMaNhanVien.getText().trim().length()==0){
             txtMaNhanVien.setBackground(Color.yellow);
             txtMaNhanVien.requestFocus();
@@ -663,6 +666,8 @@ public class frmManagerEmployee extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    //Chuyển hướng ô nhập bằng nút tab
+    
     private void txtMaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNhanVienActionPerformed
         // TODO add your handling codeere:
     }//GEN-LAST:event_txtMaNhanVienActionPerformed
