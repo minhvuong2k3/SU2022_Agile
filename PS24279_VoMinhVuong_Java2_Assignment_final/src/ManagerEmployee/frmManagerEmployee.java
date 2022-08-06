@@ -66,7 +66,7 @@ public class frmManagerEmployee extends javax.swing.JFrame {
             oos.close();
         }
     }
-    
+    //
     public boolean check(int check1){
         if(txtMaNhanVien.getText().trim().length()==0){
             txtMaNhanVien.setBackground(Color.yellow);
