@@ -56,7 +56,7 @@ public class frmManagerEmployee extends javax.swing.JFrame {
             return oo; 
         }
     }
-    
+    //
     public void writeFile (String path, Object data) throws FileNotFoundException, IOException {
         try (
                 FileOutputStream fos = new FileOutputStream(path);
