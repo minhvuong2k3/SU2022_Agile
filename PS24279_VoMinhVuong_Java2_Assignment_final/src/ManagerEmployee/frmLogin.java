@@ -1,4 +1,3 @@
-
 package ManagerEmployee;
 
 import java.util.*;
@@ -6,13 +5,34 @@ import javax.swing.JOptionPane;
 
 public class frmLogin extends javax.swing.JFrame {
 
-    
-    public void check(){
+    public void check() {
         chkRemember.setSelected(true);
         //hello
         //Vuong
     }
-    
+
+    public void login() {
+        if (txtUsername.getText() == "" || txtPassword.getText() == "") {
+            JOptionPane.showMessageDialog(this, "Username or Password is invalid!");
+        } else if (txtUsername.getText().equals("Chuong") && txtPassword.getText().equals("123aa")) {
+            JOptionPane.showMessageDialog(this, "Logged in successfully");
+            if (chkRemember.isSelected()) {
+                JOptionPane.showMessageDialog(this, "The account has been memorized");
+            }
+            new frmManagerEmployee(0).setVisible(true);
+            this.setVisible(false);
+        } else if (txtUsername.getText().equals("ketoan") && txtPassword.getText().equals("321")) {
+            JOptionPane.showMessageDialog(this, "Logged in successfully");
+            if (chkRemember.isSelected()) {
+                JOptionPane.showMessageDialog(this, "The account has been memorized");
+            }
+            new frmManagerEmployee(1).setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Username or Password is invalid");
+        }
+    }
+
     public frmLogin() {
         initComponents();
     }
@@ -119,7 +139,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void chkRememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRememberActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_chkRememberActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
@@ -132,28 +152,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        if(txtUsername.getText()=="" || txtPassword.getText()==""){
-            JOptionPane.showMessageDialog(this, "Username or Password is invalid!");
-        }
-        else if(txtUsername.getText().equals("nhansu")&&txtPassword.getText().equals("123")){
-            JOptionPane.showMessageDialog(this, "Logged in successfully");
-            if(chkRemember.isSelected()){
-                JOptionPane.showMessageDialog(this, "The account has been memorized");
-            }
-            new frmManagerEmployee(0).setVisible(true);
-            this.setVisible(false);
-        }
-        else if(txtUsername.getText().equals("ketoan")&&txtPassword.getText().equals("321")){
-            JOptionPane.showMessageDialog(this, "Logged in successfully");
-            if(chkRemember.isSelected()){
-                JOptionPane.showMessageDialog(this, "The account has been memorized");
-            }
-            new frmManagerEmployee(1).setVisible(true);
-            this.setVisible(false);
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Username or Password is invalid");
-        }
+        login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
