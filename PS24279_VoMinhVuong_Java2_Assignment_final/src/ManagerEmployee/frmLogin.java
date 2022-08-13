@@ -4,38 +4,46 @@ import java.util.*;
 import javax.swing.JOptionPane;
 
 public class frmLogin extends javax.swing.JFrame {
-
+    //========================================================================//
+    //==============================TEST FUNCTION:============================//
+    //==Test Login():==//
+    //user: null   pass: 123Aa -> fail
+    //user: Vuong  pass: null  -> fail
+    //user: Vuong  pass: 123Aa -> success
+    public void Login(String userName, String password) {
+        //  userName: Vuong ; password:123aA (Kế toán) 
+        //  userName: vuong ; password:123aa (nhân sự)  
+        //  Nhập tài khoản nhân sự nhưng lại ra kế toán 
+        if (isKeToan(userName, password)) {
+            JOptionPane.showMessageDialog(this, " 'Ke toan' Login Success");
+            
+            new frmManagerEmployee(0).setVisible(true);
+            this.setVisible(false);
+            
+        } else if (isNhanVien(userName, password)) {
+            
+            JOptionPane.showMessageDialog(this, " 'Nhan vien' Login Success");
+            new frmManagerEmployee(0).setVisible(true);
+            
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Login Fail");
+        }
+    }
+    //========================================================================//
+    
+    
     public void check() {
         chkRemember.setSelected(true);
         //hello
         //Vuong
     }
 
-    public void login() {
-        if (txtUsername.getText() == "" || txtPassword.getText() == "") {
-            JOptionPane.showMessageDialog(this, "Username or Password is invalid!");
-        } else if (txtUsername.getText().equals("Chuong") && txtPassword.getText().equals("123aa")) {
-            JOptionPane.showMessageDialog(this, "Logged in successfully");
-            if (chkRemember.isSelected()) {
-                JOptionPane.showMessageDialog(this, "The account has been memorized");
-            }
-            new frmManagerEmployee(0).setVisible(true);
-            this.setVisible(false);
-        } else if (txtUsername.getText().equals("ketoan") && txtPassword.getText().equals("321")) {
-            JOptionPane.showMessageDialog(this, "Logged in successfully");
-            if (chkRemember.isSelected()) {
-                JOptionPane.showMessageDialog(this, "The account has been memorized");
-            }
-            new frmManagerEmployee(1).setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "Username or Password is invalid");
-        }
-    }
-
     public frmLogin() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,9 +160,25 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        login();
+        Login(txtUsername.getText(), String.valueOf(txtPassword.getPassword()));
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    public boolean isKeToan(String userName, String password) {
+        if (userName.equalsIgnoreCase("Vuong") && password.equalsIgnoreCase("123aA")) {
+            return true ;
+        } else {
+            return false;
+        }
+    }
+    public boolean isNhanVien(String userName, String password) {
+        if (userName.equalsIgnoreCase("vuong") && password.equalsIgnoreCase("123aa")) {
+            return true ;
+        } else {
+            return false;
+        }
+    }
+
+    
     /**
      * @param args the command line arguments
      */
