@@ -21,15 +21,43 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class frmManagerEmployee extends javax.swing.JFrame {
+
+    //========================================================================//
+    //==============================TEST FUNCTION:============================//
+    //==Test Check():==//
+        //Báo luu thành công nhung không hien anh
+    public boolean check(String img, String nameU, String adress, String phone) {
+        if (checkImg() && checkName(nameU) && checkAddress(adress) && checkPhone(phone)) {
+            JOptionPane.showMessageDialog(this, "Luu thanh cong");
+            return true;
+        }
+        return false;
+    }
     
+    //==Test RemoveUser():==//
+    public boolean RemoveUser(String ID, String name){
+        for (int i = 0; i < fileSize ; i ++) {
+            if(SearchIdInFile(ID, name)){
+                removeUserInFile(ID, name);
+            } else {
+                JOptionPane.showMessageDialog(this, "Khong tim thay id");
+                JOptionPane.showMessageDialog(this, "Remove fail");
+                break;
+            }
+        }
+        return false;
+    }
+    //========================================================================//
+
     String path = "C:\\Users\\Admin\\Documents\\Github\\SU2022_Agile\\PS24279_VoMinhVuong_Java2_Assignment_final\\Employee.dat";
 
     List<Employee> list = new ArrayList<>();
     int index = 0;
-    int index1 = 0,index2 = 0, index3 = 0, index4 = 0;
+    int index1 = 0, index2 = 0, index3 = 0, index4 = 0;
     int alt = -1;
-        
-    public void addEmployee(){
+    int fileSize = 10;
+    
+    public void addEmployee() {
         Employee emp = new Employee();
         emp.setManv(txtMaNhanVien.getText());
         emp.setHoTen(txtHoVaTen.getText());
@@ -39,23 +67,63 @@ public class frmManagerEmployee extends javax.swing.JFrame {
         list.add(emp);
     }
 
-    public void jbindex(int x){
-        if(x==0)
-            jbindex.setText("|| -  "+String.valueOf(index+1)+"  of  "+String.valueOf(list.size())+"  - ||");
-        else 
-            jbindex.setText("|| -  "+String.valueOf(index)+"  of  "+String.valueOf(list.size())+"  - ||");
+    public boolean checkImg() {
+        return true;
     }
-    
-    public Object readFile(String path) throws FileNotFoundException, IOException, ClassNotFoundException{
-        try (
-                FileInputStream fis = new FileInputStream(path);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-            ){
-            Object oo = ois.readObject();
-            ois.close();
-            return oo; 
+
+    public boolean checkName(String nameU) {
+        if (nameU.equals("")) {
+            return false;
+        } else {
+            return true;
         }
     }
+    
+    public boolean SearchIdInFile (String ID, String name) {
+        return false;
+    }
+    
+    public void removeUserInFile(String ID, String name) {
+        JOptionPane.showMessageDialog(this, "Xoa thanh cong");
+    }
+
+    public boolean checkAddress(String address) {
+        if (address.equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean checkPhone(String phone) {
+        if (phone.equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void jbindex(int x) {
+        if (x == 0) {
+            jbindex.setText("|| -  " + String.valueOf(index + 1) + "  of  " + String.valueOf(list.size()) + "  - ||");
+        } else {
+            jbindex.setText("|| -  " + String.valueOf(index) + "  of  " + String.valueOf(list.size()) + "  - ||");
+        }
+    }
+
+    public void historyLogout() {
+
+    }
+
+    public Object readFile(String path) throws FileNotFoundException, IOException, ClassNotFoundException {
+        try (
+                 FileInputStream fis = new FileInputStream(path);  ObjectInputStream ois = new ObjectInputStream(fis);) {
+            Object oo = ois.readObject();
+            ois.close();
+            return oo;
+        }
+    }
+<<<<<<< HEAD
     //
     public void writeFile (String path, Object data) throws FileNotFoundException, IOException {
         try (
@@ -69,132 +137,137 @@ public class frmManagerEmployee extends javax.swing.JFrame {
     //
     public boolean check(int check1){
         if(txtMaNhanVien.getText().trim().length()==0){
+=======
+
+//    public void writeFile(String path, Object data) throws FileNotFoundException, IOException {
+//        try (
+//                 FileOutputStream fos = new FileOutputStream(path);  ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+//            oos.writeObject(data);
+//            oos.close();
+//        }
+//    }
+
+    public boolean check(int check1) {
+
+        //chức năng kiểm tra thông tin đăng nhập
+        if (txtMaNhanVien.getText().trim().length() == 0) {
+>>>>>>> main
             txtMaNhanVien.setBackground(Color.yellow);
             txtMaNhanVien.requestFocus();
-            JOptionPane.showMessageDialog(this, "must not be empty!","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "must not be empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }
-        else {
+        } else {
             txtMaNhanVien.setBackground(Color.white);
-            if(check1==0){
-                for(int i = 0; i < list.size(); i++){
+            if (check1 == 0) {
+                for (int i = 0; i < list.size(); i++) {
                     Employee emp = list.get(i);
-                    if(txtMaNhanVien.getText().trim().equals(emp.getManv())){
-                        JOptionPane.showMessageDialog(this, "ID already exist!","Error",JOptionPane.ERROR_MESSAGE);
+                    if (txtMaNhanVien.getText().trim().equals(emp.getManv())) {
+                        JOptionPane.showMessageDialog(this, "ID already exist!", "Error", JOptionPane.ERROR_MESSAGE);
                         txtMaNhanVien.setBackground(Color.yellow);
                         txtMaNhanVien.requestFocus();
                         return false;
                     }
-                }              
-            }
-            else {
-                for(int i = 0; i < list.size(); i++){
-                    if(i!=index){
+                }
+            } else {
+                for (int i = 0; i < list.size(); i++) {
+                    if (i != index) {
                         Employee emp = list.get(i);
-                        if(txtMaNhanVien.getText().trim().equals(emp.getManv())){
-                            JOptionPane.showMessageDialog(this, "ID already exist!","Error",JOptionPane.ERROR_MESSAGE);
+                        if (txtMaNhanVien.getText().trim().equals(emp.getManv())) {
+                            JOptionPane.showMessageDialog(this, "ID already exist!", "Error", JOptionPane.ERROR_MESSAGE);
                             txtMaNhanVien.setBackground(Color.yellow);
                             txtMaNhanVien.requestFocus();
                             return false;
                         }
-                    }                   
-                }                      
-            }          
-        }
-        if(txtHoVaTen.getText().trim().length()==0){
-            txtHoVaTen.setBackground(Color.yellow);
-            txtHoVaTen.requestFocus();
-            JOptionPane.showMessageDialog(this, "must not be empty!","Error",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        else {
-            txtHoVaTen.setBackground(Color.white);           
-        }
-        try{
-            if(txtTuoi.getText().trim().length()==0){
-                txtTuoi.setBackground(Color.yellow);
-                txtTuoi.requestFocus();
-                JOptionPane.showMessageDialog(this, "must not be empty!","Error",JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-            else {
-                txtTuoi.setBackground(Color.white);
-                if(Integer.parseInt(txtTuoi.getText()) < 16 || Integer.parseInt(txtTuoi.getText()) > 55 ){
-                    txtTuoi.setBackground(Color.yellow);
-                    txtTuoi.requestFocus();
-                    JOptionPane.showMessageDialog(this, "Age must be between 16 - 55!","Error",JOptionPane.ERROR_MESSAGE);
-                    return false;
+                    }
                 }
             }
         }
-        catch(Exception e){
+        if (txtHoVaTen.getText().trim().length() == 0) {
+            txtHoVaTen.setBackground(Color.yellow);
+            txtHoVaTen.requestFocus();
+            JOptionPane.showMessageDialog(this, "must not be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            txtHoVaTen.setBackground(Color.white);
+        }
+        try {
+            if (txtTuoi.getText().trim().length() == 0) {
+                txtTuoi.setBackground(Color.yellow);
+                txtTuoi.requestFocus();
+                JOptionPane.showMessageDialog(this, "must not be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            } else {
+                txtTuoi.setBackground(Color.white);
+                if (Integer.parseInt(txtTuoi.getText()) < 16 || Integer.parseInt(txtTuoi.getText()) > 55) {
+                    txtTuoi.setBackground(Color.yellow);
+                    txtTuoi.requestFocus();
+                    JOptionPane.showMessageDialog(this, "Age must be between 16 - 55!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+        } catch (Exception e) {
             txtTuoi.setBackground(Color.yellow);
             txtTuoi.requestFocus();
-            JOptionPane.showMessageDialog(this, "Malformed data!","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Malformed data!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         String reEmail = "\\w+@+\\w+(\\.+\\w+){1,2}";
-        if(txtEmail.getText().trim().length()==0){
+        if (txtEmail.getText().trim().length() == 0) {
             txtEmail.setBackground(Color.yellow);
             txtEmail.requestFocus();
-            JOptionPane.showMessageDialog(this, "must not be empty!","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "must not be empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }
-        else {
+        } else {
             txtEmail.setBackground(Color.white);
-            if(!txtEmail.getText().matches(reEmail)){
+            if (!txtEmail.getText().matches(reEmail)) {
                 txtEmail.setBackground(Color.yellow);
                 txtEmail.requestFocus();
-                JOptionPane.showMessageDialog(this, "Malformed email!","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Malformed email!", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }
-            else {
+            } else {
                 txtEmail.setBackground(Color.white);
             }
         }
-        if(txtLuong.getText().trim().length()==0){
+        if (txtLuong.getText().trim().length() == 0) {
             txtLuong.setBackground(Color.yellow);
             txtLuong.requestFocus();
-            JOptionPane.showMessageDialog(this, "must not be empty!","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "must not be empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }
-        else {
+        } else {
             txtLuong.setBackground(Color.white);
-            if(Double.parseDouble(txtLuong.getText())<5000000){
+            if (Double.parseDouble(txtLuong.getText()) < 5000000) {
                 txtLuong.setBackground(Color.yellow);
                 txtLuong.requestFocus();
-                JOptionPane.showMessageDialog(this, "Salary must be > 5000000 VND!","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Salary must be > 5000000 VND!", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
         return true;
     }
-    
-    public void checkBtn(){
-        if(index == 0){
+
+    public void checkBtn() {
+        if (index == 0) {
             btnFirst.setEnabled(false);
             btnLast.setEnabled(true);
-        }
-        else if(index == list.size()-1){
+        } else if (index == list.size() - 1) {
             btnLast.setEnabled(false);
             btnFirst.setEnabled(true);
-        }
-        else {
+        } else {
             btnLast.setEnabled(true);
             btnFirst.setEnabled(true);
         }
     }
-    
-    public void fillToTable(){
-        DefaultTableModel model = (DefaultTableModel)tblNhanVien.getModel();
+
+    public void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
-        for(Employee emp:list){
-            Object[] rows = new Object[]{emp.getManv(),emp.getHoTen(),emp.getTuoi(),emp.getEmail(),emp.getLuong()};          
+        for (Employee emp : list) {
+            Object[] rows = new Object[]{emp.getManv(), emp.getHoTen(), emp.getTuoi(), emp.getEmail(), emp.getLuong()};
             model.addRow(rows);
         }
     }
-    
-    public void updateEmployee(){
+
+    public void updateEmployee() {
         Employee emp = list.get(index);
         emp.setManv(txtMaNhanVien.getText());
         emp.setHoTen(txtHoVaTen.getText());
@@ -202,13 +275,13 @@ public class frmManagerEmployee extends javax.swing.JFrame {
         emp.setEmail(txtEmail.getText());
         emp.setLuong(Double.parseDouble(txtLuong.getText()));
     }
-    
-    public void updateSamary(){
+
+    public void updateSamary() {
         Employee emp = list.get(index);
         emp.setLuong(Double.parseDouble(txtLuong.getText()));
     }
 
-    public void showDetail(){
+    public void showDetail() {
         Employee emp = list.get(index);
         txtMaNhanVien.setText(emp.getManv());
         txtHoVaTen.setText(emp.getHoTen());
@@ -216,52 +289,55 @@ public class frmManagerEmployee extends javax.swing.JFrame {
         txtEmail.setText(emp.getEmail());
         txtLuong.setText(String.valueOf(emp.getLuong()));
     }
-       
-    public void clearForm(){
+
+    public void clearForm() {
         txtMaNhanVien.setText("");
         txtHoVaTen.setText("");
         txtTuoi.setText("");
         txtEmail.setText("");
         txtLuong.setText("");
     }
-    
-    public void findByName(){
+
+    public void findByName() {
         List<Employee> list1 = new ArrayList<>();
-        for(Employee emp:list){
-            if(emp.getHoTen().contains(txtHoVaTen.getText()))
+        for (Employee emp : list) {
+            if (emp.getHoTen().contains(txtHoVaTen.getText())) {
                 list1.add(emp);
+            }
         }
-        DefaultTableModel model = (DefaultTableModel)tblNhanVien.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
-        for(Employee emp:list1){
-            Object[] rows = new Object[]{emp.getManv(),emp.getHoTen(),emp.getTuoi(),emp.getEmail(),emp.getLuong()};          
+        for (Employee emp : list1) {
+            Object[] rows = new Object[]{emp.getManv(), emp.getHoTen(), emp.getTuoi(), emp.getEmail(), emp.getLuong()};
             model.addRow(rows);
         }
 
     }
+
     public frmManagerEmployee(int x) {
-        if(x==0)
+        if (x == 0) {
             alt = 0;
-        else 
+        } else {
             alt = 1;
-        initComponents();    
+        }
+        initComponents();
         jbindex(-1);
-        new Thread(){
+        new Thread() {
             @Override
-            public void run(){
-                while(true){
+            public void run() {
+                while (true) {
                     Date now = new Date();
                     SimpleDateFormat formater = new SimpleDateFormat("hh:mm:ss aa");
                     String time = formater.format(now);
                     jbClock.setText(time);
                     try {
                         Thread.sleep(1000);
-                    } catch (InterruptedException ex) {}
+                    } catch (InterruptedException ex) {
+                    }
                 }
             }
         }.start();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -288,7 +364,7 @@ public class frmManagerEmployee extends javax.swing.JFrame {
         txtLuong = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNhanVien = new javax.swing.JTable();
-        btnNew = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         btnOpen = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnFind = new javax.swing.JButton();
@@ -366,11 +442,11 @@ public class frmManagerEmployee extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblNhanVien);
 
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ManagerEmployee/add-document-free-icon-font.png"))); // NOI18N
-        btnNew.setText("New");
-        btnNew.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ManagerEmployee/add-document-free-icon-font.png"))); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -526,7 +602,7 @@ public class frmManagerEmployee extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(btnFind, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                                            .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -594,7 +670,7 @@ public class frmManagerEmployee extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(txtMaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnNew)
+                                    .addComponent(btnDelete)
                                     .addComponent(btnSave))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,87 +733,81 @@ public class frmManagerEmployee extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    //Chuyển hướng ô nhập bằng nút tab
+
     private void txtMaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNhanVienActionPerformed
         // TODO add your handling codeere:
     }//GEN-LAST:event_txtMaNhanVienActionPerformed
 
-    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        clearForm();
-        txtMaNhanVien.requestFocus();
-    }//GEN-LAST:event_btnNewActionPerformed
+        RemoveUser(txtMaNhanVien.getText(),txtHoVaTen.getText());
+//        clearForm();
+//        txtMaNhanVien.requestFocus();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        if(alt==0){
-            if(check(0)){           
-                try {
+        if (check("img", txtHoVaTen.getText(), txtLuong.getText(), txtEmail.getText())) {
+            if (alt == 0) {
+                if (check(0)) {
                     addEmployee();
                     fillToTable();
-                    writeFile(path, list);               
-                    index = list.size()-1;
+                    //                        writeFile(path, list);
+                    index = list.size() - 1;
                     jbindex(0);
                     tblNhanVien.setRowSelectionInterval(index, index);
                     checkBtn();
-                } catch (IOException ex) {
-                    Logger.getLogger(frmManagerEmployee.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }  
+            } else {
+                JOptionPane.showMessageDialog(this, "Bạn không đủ quyền hạng để thực hiện chức năng này!");
+            }
         }
-        else 
-            JOptionPane.showMessageDialog(this, "Bạn không đủ quyền hạng để thực hiện chức năng này!");
-          
+
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        if(alt == 0){
-            if(tblNhanVien.getSelectedRow()!=-1){
-                if(check(1)){
-                    int check = JOptionPane.showConfirmDialog(this, "Update ?","confirm",JOptionPane.YES_NO_OPTION);
-                    if(check == JOptionPane.YES_OPTION){
-                        try {
-                            updateEmployee();
-                            fillToTable();
-                            writeFile(path, list);
-                            tblNhanVien.setRowSelectionInterval(index, index);
-                            JOptionPane.showMessageDialog(this, "Successfully Update!");
-                            jbindex(0);
-                        } catch (IOException ex) {
-                            Logger.getLogger(frmManagerEmployee.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Select the employee to be corrected!","Error",JOptionPane.WARNING_MESSAGE);
+        if (alt == 0) {
+            if (tblNhanVien.getSelectedRow() != -1) {
+                if (check(1)) {
+                    int check = JOptionPane.showConfirmDialog(this, "Update ?", "confirm", JOptionPane.YES_NO_OPTION);
+                    if (check == JOptionPane.YES_OPTION) {
+                        updateEmployee();
+                        fillToTable();
+                        //                            writeFile(path, list);
+                        tblNhanVien.setRowSelectionInterval(index, index);
+                        JOptionPane.showMessageDialog(this, "Successfully Update!");
+                        jbindex(0);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Select the employee to be corrected!", "Error", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
-                }          
-            }  
-            else 
+                }
+            } else {
                 JOptionPane.showMessageDialog(this, "Bạn không đủ quyền hạng để thực hiện chức năng này!");
+            }
         }
-        
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         // TODO add your handling code here:
-        if(txtMaNhanVien.getText().trim().length()!=0){
-            for(int i=0;i<list.size();i++){
-                if(list.get(i).getManv().equals(txtMaNhanVien.getText())){
+        if (txtMaNhanVien.getText().trim().length() != 0) {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getManv().equals(txtMaNhanVien.getText())) {
                     index = i;
                     showDetail();
                     tblNhanVien.setRowSelectionInterval(index, index);
                     return;
                 }
             }
-            JOptionPane.showMessageDialog(this, "Không có nhân viên nào trùng khớp!","error",JOptionPane.WARNING_MESSAGE);
-        }
-        else if(txtHoVaTen.getText().trim().length()!=0){
+            JOptionPane.showMessageDialog(this, "Không có nhân viên nào trùng khớp!", "error", JOptionPane.WARNING_MESSAGE);
+        } else if (txtHoVaTen.getText().trim().length() != 0) {
             findByName();
-        }
-        else {
+        } else {
             fillToTable();
-            index=0;
+            index = 0;
             tblNhanVien.setRowSelectionInterval(index, index);
             showDetail();
         }
@@ -751,102 +821,100 @@ public class frmManagerEmployee extends javax.swing.JFrame {
 
     private void btnSapxepIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapxepIDActionPerformed
         // TODO add your handling code here:
-        index2 ++;
-        if(index2 % 2 !=0){
-            Comparator<Employee> ma = new Comparator<>(){
+        index2++;
+        if (index2 % 2 != 0) {
+            Comparator<Employee> ma = new Comparator<>() {
                 @Override
                 public int compare(Employee o1, Employee o2) {
                     return o1.getManv().compareTo(o2.getManv());
-                }           
+                }
             };
-            Collections.sort(list, ma); 
-        }
-        else {
-            Comparator<Employee> ma = new Comparator<>(){
+            Collections.sort(list, ma);
+        } else {
+            Comparator<Employee> ma = new Comparator<>() {
                 @Override
                 public int compare(Employee o1, Employee o2) {
                     return o2.getManv().compareTo(o1.getManv());
-                }           
+                }
             };
-            Collections.sort(list, ma); 
+            Collections.sort(list, ma);
         }
         fillToTable();
     }//GEN-LAST:event_btnSapxepIDActionPerformed
 
     private void btnSapxepTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapxepTenActionPerformed
         // TODO add your handling code here:
-        index1 ++;
-        if(index1 % 2 != 0){
-            Comparator<Employee> ten = new Comparator<>(){
+        index1++;
+        if (index1 % 2 != 0) {
+            Comparator<Employee> ten = new Comparator<>() {
                 @Override
                 public int compare(Employee o1, Employee o2) {
                     return o1.getHoTen().compareTo(o2.getHoTen());
-                }           
+                }
             };
-            Collections.sort(list, ten);            
-        }
-        else {
-            Comparator<Employee> ten = new Comparator<>(){
+            Collections.sort(list, ten);
+        } else {
+            Comparator<Employee> ten = new Comparator<>() {
                 @Override
                 public int compare(Employee o1, Employee o2) {
                     return o2.getHoTen().compareTo(o1.getHoTen());
-                }           
+                }
             };
             Collections.sort(list, ten);
-        }       
+        }
         fillToTable();
     }//GEN-LAST:event_btnSapxepTenActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:   
-        if(list.size()>0){
+        if (list.size() > 0) {
             index = 0;
             tblNhanVien.setRowSelectionInterval(index, index);
             showDetail();
             checkBtn();
             jbindex(0);
         }
-        
+
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
         // TODO add your handling code here:
-        if(list.size()>0){
-            if(index > 0){
-                index --;
+        if (list.size() > 0) {
+            if (index > 0) {
+                index--;
                 tblNhanVien.setRowSelectionInterval(index, index);
                 showDetail();
             }
             checkBtn();
             jbindex(0);
         }
-        
+
     }//GEN-LAST:event_btnPreviousActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
-        if(list.size()>0){
-            if(index<list.size()-1){
-                index ++;
+        if (list.size() > 0) {
+            if (index < list.size() - 1) {
+                index++;
                 tblNhanVien.setRowSelectionInterval(index, index);
                 showDetail();
             }
             checkBtn();
             jbindex(0);
         }
-        
+
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here: 
-        if(list.size()>0){
-            index = list.size()-1;
+        if (list.size() > 0) {
+            index = list.size() - 1;
             tblNhanVien.setRowSelectionInterval(index, index);
-            showDetail();  
-            checkBtn(); 
+            showDetail();
+            checkBtn();
             jbindex(0);
         }
-        
+
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
@@ -859,49 +927,47 @@ public class frmManagerEmployee extends javax.swing.JFrame {
 
     private void btnSapxepTuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapxepTuoiActionPerformed
         // TODO add your handling code here:
-        index3 ++;
-        if(index3 % 2 !=0){
-            Comparator<Employee> Age = new Comparator<>(){
+        index3++;
+        if (index3 % 2 != 0) {
+            Comparator<Employee> Age = new Comparator<>() {
                 @Override
                 public int compare(Employee o1, Employee o2) {
                     return o1.getTuoi() - o2.getTuoi();
-                }           
+                }
             };
-            Collections.sort(list, Age); 
-        }
-        else {
-            Comparator<Employee>  Age = new Comparator<>(){
+            Collections.sort(list, Age);
+        } else {
+            Comparator<Employee> Age = new Comparator<>() {
                 @Override
                 public int compare(Employee o1, Employee o2) {
                     return o2.getTuoi() - o1.getTuoi();
-                }           
+                }
             };
-            Collections.sort(list, Age); 
+            Collections.sort(list, Age);
         }
         fillToTable();
-        
+
     }//GEN-LAST:event_btnSapxepTuoiActionPerformed
 
     private void btnSapxepLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapxepLuongActionPerformed
         // TODO add your handling code here:
-        index4 ++;
-        if(index4 % 2 !=0){
-            Comparator<Employee> Samary = new Comparator<>(){
+        index4++;
+        if (index4 % 2 != 0) {
+            Comparator<Employee> Samary = new Comparator<>() {
                 @Override
                 public int compare(Employee o1, Employee o2) {
                     return (int) (o1.getLuong() - o2.getLuong());
-                }           
+                }
             };
-            Collections.sort(list, Samary); 
-        }
-        else {
-            Comparator<Employee>  Samary = new Comparator<>(){
+            Collections.sort(list, Samary);
+        } else {
+            Comparator<Employee> Samary = new Comparator<>() {
                 @Override
                 public int compare(Employee o1, Employee o2) {
                     return (int) (o2.getLuong() - o1.getLuong());
-                }           
+                }
             };
-            Collections.sort(list, Samary); 
+            Collections.sort(list, Samary);
         }
         fillToTable();
     }//GEN-LAST:event_btnSapxepLuongActionPerformed
@@ -909,15 +975,15 @@ public class frmManagerEmployee extends javax.swing.JFrame {
     private void btnOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenActionPerformed
         try {
             // TODO add your handling code here:
-            list = (List<Employee>) readFile(path);           
-            if(list != null){
+            list = (List<Employee>) readFile(path);
+            if (list != null) {
                 index = 0;
                 checkBtn();
                 fillToTable();
                 showDetail();
                 tblNhanVien.setRowSelectionInterval(index, index);
                 jbindex(0);
-            }          
+            }
         } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
         }
@@ -925,23 +991,18 @@ public class frmManagerEmployee extends javax.swing.JFrame {
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         // TODO add your handling code here:
-        if(tblNhanVien.getSelectedRow()!=-1){
-            if(check(1)){
-                int check = JOptionPane.showConfirmDialog(this, "Update ?","confirm",JOptionPane.YES_NO_OPTION);
-                if(check == JOptionPane.YES_OPTION){
-                    try {
-                        updateSamary();
-                        fillToTable();
-                        writeFile(path, list);
-                        tblNhanVien.setRowSelectionInterval(index, index);
-                        JOptionPane.showMessageDialog(this, "Successfully Update!");
-                        jbindex(0);
-                    } catch (IOException ex) {
-                        Logger.getLogger(frmManagerEmployee.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                else {
-                    JOptionPane.showMessageDialog(this, "Select the employee to be corrected!","Error",JOptionPane.WARNING_MESSAGE);
+        if (tblNhanVien.getSelectedRow() != -1) {
+            if (check(1)) {
+                int check = JOptionPane.showConfirmDialog(this, "Update ?", "confirm", JOptionPane.YES_NO_OPTION);
+                if (check == JOptionPane.YES_OPTION) {
+                    updateSamary();
+                    fillToTable();
+                    //                        writeFile(path, list);
+                    tblNhanVien.setRowSelectionInterval(index, index);
+                    JOptionPane.showMessageDialog(this, "Successfully Update!");
+                    jbindex(0);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Select the employee to be corrected!", "Error", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
@@ -985,11 +1046,11 @@ public class frmManagerEmployee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnFind;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
-    private javax.swing.JButton btnNew;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnOpen;
     private javax.swing.JButton btnPrevious;
